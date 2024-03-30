@@ -26,7 +26,7 @@ export default function Login() {
       return;
     }
 
-    router.push("/dashboard");
+    router.push(`${process.env.NEXT_PUBLIC_BACKEND_URL}/dashboard`);
   };
 
   return (
