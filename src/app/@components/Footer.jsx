@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="text-center mt-2">
           <a
-            href="https://github.com/dunel/"
+            href="https://github.com/dunel/noticiasapp"
             className="text-white hover:text-gray-400"
           >
             GitHub del proyecto

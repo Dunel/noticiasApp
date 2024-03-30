@@ -17,7 +17,7 @@ const handler = NextAuth({
       async authorize(credentials) {
         const res = await axios
           .post(
-            "/api/login",
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login`,
             {
               email: credentials.email,
               password: credentials.password,
@@ -49,7 +49,7 @@ const handler = NextAuth({
     },
   },
   pages: {
-    signIn: "/login",
+    signIn: `${process.env.NEXT_PUBLIC_BACKEND_URL}/login`,
   },
 });
 
