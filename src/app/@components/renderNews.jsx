@@ -40,7 +40,7 @@ export default function RenderNews() {
           <Link href={`/noticias/${e.id}`}>
             <h2 className="text-2xl font-bold mb-2">{e.title}</h2>
           </Link>
-          <div>{e.body}</div>
+          <div dangerouslySetInnerHTML={{ __html: e.body.length > 200 ? `${e.body.substring(0, 700)}...` : e.body }}></div>
           <div className="flex justify-between items-center mt-4">
             <Link href={`/noticias/${e.id}`} className="underline">
               Leer más

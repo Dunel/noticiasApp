@@ -1,6 +1,5 @@
 import prisma from "@/db";
 import jwt from "jsonwebtoken";
-//import User from "@/models/User";
 
 export async function POST(request) {
   try {

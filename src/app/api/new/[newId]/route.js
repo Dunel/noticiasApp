@@ -74,7 +74,7 @@ export async function DELETE(request, { params }) {
 
 export async function PUT(request, { params }) {
   try {
-    const id = parseInt(params.newId);
+    let id = parseInt(params.newId);
     let { title, body, authorId } = await request.json();
 
     if (!authorId || !title || !body || !id) {

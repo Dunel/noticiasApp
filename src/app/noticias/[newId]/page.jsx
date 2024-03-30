@@ -29,7 +29,7 @@ export default function News({ params }) {
         <div className="grid grid-cols-3 gap-8">
           <ColLeft>
             <GridNew>
-              <p>{news.body}</p>
+            <div dangerouslySetInnerHTML={{ __html: news.body }}></div>
             </GridNew>
           </ColLeft>
 
