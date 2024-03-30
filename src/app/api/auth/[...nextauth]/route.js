@@ -49,7 +49,7 @@ const handler = NextAuth({
     },
   },
   pages: {
-    signIn: `${process.env.NEXT_PUBLIC_BACKEND_URL}/login`,
+    signIn: '/login',
   },
 });
 
