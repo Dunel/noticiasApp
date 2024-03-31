@@ -1,39 +1,35 @@
 "use client";
 import { useEffect, useState } from "react";
 import Header from "../@components/header";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import ContainerWeb from "../@components/ContainerWeb";
 
-export default function Login() {
-  const { data: session } = useSession();
+export default function Login({ searchParams }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleClick = async (event) => {
-    event.preventDefault();
+  const handleClick = async () => {
     setError([]);
-  
+
     const responseNextAuth = await signIn("credentials", {
       email,
       password,
+      callbackUrl: "/dashboard",
     });
-  
+
     if (responseNextAuth?.error) {
-      setError(responseNextAuth.error.split(","));
-      return;
+      return setError(responseNextAuth.error.split(","));
     }
-  
-    router.push('/dashboard');
   };
 
-useEffect(() => {
-  if (session) {
-    return router.push('/dashboard');
-  }
-}, [session]);
+  useEffect(() => {
+    if (searchParams.error) {
+      setError(searchParams.error);
+    }
+  }, [searchParams]);
 
   return (
     <>
@@ -113,11 +109,11 @@ useEffect(() => {
               {error.length > 0 && (
                 <div className="mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
                   <ul className="list-disc list-inside mb-0">
-                    {error.map((erro, index) => (
-                      <li key={index} className="mt-1">
-                        {erro}
+                    {error?
+                      <li className="mt-1">
+                        {error}
                       </li>
-                    ))}
+                    :""}
                   </ul>
                 </div>
               )}

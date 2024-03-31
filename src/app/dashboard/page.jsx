@@ -52,7 +52,7 @@ export default function Dashboard() {
                   </h2>
                 </div>
               </Link>
-              <Link href="/users">
+              <Link href="#">
                 <div className="block bg-white rounded-lg shadow-md p-6 w-full mb-6">
                   <h2 className="text-xl font-semibold mb-2">
                     Editar usuarios
