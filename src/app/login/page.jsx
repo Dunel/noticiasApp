@@ -1,33 +1,39 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../@components/header";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import ContainerWeb from "../@components/ContainerWeb";
 
 export default function Login() {
+  const { data: session } = useSession();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleClick = async () => {
+  const handleClick = async (event) => {
+    event.preventDefault();
     setError([]);
-
+  
     const responseNextAuth = await signIn("credentials", {
       email,
       password,
-      redirect: false,
     });
-
+  
     if (responseNextAuth?.error) {
-      //console.log(responseNextAuth)
       setError(responseNextAuth.error.split(","));
       return;
     }
-
-    router.push(`${process.env.NEXT_PUBLIC_BACKEND_URL}/dashboard`);
+  
+    router.push('/dashboard');
   };
+
+useEffect(() => {
+  if (session) {
+    return router.push('/dashboard');
+  }
+}, [session]);
 
   return (
     <>
