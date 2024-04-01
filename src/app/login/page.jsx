@@ -1,18 +1,17 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Header from "../@components/header";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import ContainerWeb from "../@components/ContainerWeb";
 
-export default function Login({ searchParams }) {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const router = useRouter();
+  const searchparams = useSearchParams();
+  const error = searchparams.get("error");
 
   const handleClick = async () => {
-    setError([]);
 
     const responseNextAuth = await signIn("credentials", {
       email,
@@ -21,15 +20,9 @@ export default function Login({ searchParams }) {
     });
 
     if (responseNextAuth?.error) {
-      return setError(responseNextAuth.error.split(","));
+      return;
     }
   };
-
-  useEffect(() => {
-    if (searchParams.error) {
-      setError(searchParams.error);
-    }
-  }, [searchParams]);
 
   return (
     <>
@@ -106,17 +99,13 @@ export default function Login({ searchParams }) {
                 </a>
               </div>
 
-              {error.length > 0 && (
+              {error? (
                 <div className="mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
                   <ul className="list-disc list-inside mb-0">
-                    {error?
-                      <li className="mt-1">
-                        {error}
-                      </li>
-                    :""}
+                    {<li className="mt-1">{error}</li>}
                   </ul>
                 </div>
-              )}
+              ):""}
             </div>
           </div>
         </div>
