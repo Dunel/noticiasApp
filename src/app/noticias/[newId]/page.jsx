@@ -1,5 +1,6 @@
 "use client";
 import ColLeft from "@/app/@components/ColLeft";
+import ColRight from "@/app/@components/ColRight";
 import ContainerWeb from "@/app/@components/ContainerWeb";
 import GridNew from "@/app/@components/gridNew";
 import Header from "@/app/@components/header";
