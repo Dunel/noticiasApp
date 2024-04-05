@@ -9,7 +9,7 @@ export default function News() {
     <>
       <Header title={`Informacion`} />
       <ContainerWeb>
-        <div className="grid grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <ColLeft>
             <GridNew>
               <h1>
